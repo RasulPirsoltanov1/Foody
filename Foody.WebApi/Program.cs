@@ -1,4 +1,5 @@
 using Foody.WebApi.Context;
+using Foody.WebApi.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
+//builder.Services.AddAutoMapper(typeof(GeneralMapping).Assembly);
 
 var app = builder.Build();
 
