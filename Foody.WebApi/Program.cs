@@ -1,5 +1,7 @@
 using Foody.WebApi.Context;
 using Foody.WebApi.Mapping;
+using FluentValidation;
+using Foody.WebApi.ValidationRules;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
-//builder.Services.AddAutoMapper(typeof(GeneralMapping).Assembly);
-
+builder.Services.AddAutoMapper(typeof(GeneralMapping).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(ProductValidator).Assembly);
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 var app = builder.Build();
 
 

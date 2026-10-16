@@ -9,15 +9,15 @@ namespace Foody.WebApi.Context
     {
         public AppDbContext()
         {
-            var databaseCreator = Database.GetService<IRelationalDatabaseCreator>();
-            if (databaseCreator != null)
-            {
-                if (!databaseCreator.Exists())
-                    databaseCreator.Create();
+            //var databaseCreator = Database.GetService<IRelationalDatabaseCreator>();
+            //if (databaseCreator != null)
+            //{
+            //    if (!databaseCreator.Exists())
+            //        databaseCreator.Create();
 
-                if (!databaseCreator.HasTables())
-                    databaseCreator.CreateTables();
-            }
+            //    if (!databaseCreator.HasTables())
+            //        databaseCreator.CreateTables();
+            //}
         }
 
 

@@ -2,6 +2,7 @@
 using Foody.WebApi.Entites;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Foody.WebApi.Controllers
 {
@@ -20,7 +21,7 @@ namespace Foody.WebApi.Controllers
         [HttpGet]
         public IActionResult GetAllCategories()
         {
-            var values = _dbContext.Categories.ToList();
+            var values = _dbContext.Categories.Include(c => c.Products).ToList();
             return Ok(values);
         }
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Foody.WebApi.Dtos.FeatureDtos;
 using Foody.WebApi.Dtos.MessageDtos;
+using Foody.WebApi.Dtos.ProductDtos;
 using Foody.WebApi.Entites;
 
 namespace Foody.WebApi.Mapping
@@ -18,6 +19,9 @@ namespace Foody.WebApi.Mapping
             CreateMap<Message, CreateMessageDto>().ReverseMap();
             CreateMap<Message, UpdateMessageDto>().ReverseMap();
             CreateMap<Message, GetByIdMessageDto>().ReverseMap();
+
+            CreateMap<Product, CreateProductDto>().ReverseMap();
+            CreateMap<Product, ResultProductWithCategoryDto>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName)).ReverseMap();
         }
     }
 }
