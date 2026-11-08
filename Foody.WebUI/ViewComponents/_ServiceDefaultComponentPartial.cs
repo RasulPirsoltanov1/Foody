@@ -15,19 +15,26 @@ namespace Foody.WebUI.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
-            var response =await client.GetAsync("https://localhost:7137/api/Services/");
-            if(response.IsSuccessStatusCode)
+            try
             {
-                var data = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.GetAsync("https://localhost:7137/api/Services/");
+                if (response.IsSuccessStatusCode)
                 {
-                    PropertyNameCaseInsensitive = true
-                };
-                var values =JsonSerializer.Deserialize<List<ResultServiceDto>>(data,options);
-                return View(values);
+                    var data = await response.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    var values = JsonSerializer.Deserialize<List<ResultServiceDto>>(data, options);
+                    return View(values);
+                }
             }
-            return View();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return View(null);
         }
     }
 }
